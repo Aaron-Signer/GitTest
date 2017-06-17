@@ -1,4 +1,4 @@
-//Final Test young
+//Final Test young kill me
 
 Creature sG = new Creature("Steelclaw Grizly", 17, 0, 4, 3, 15, 7, 1,0,0,0);
 Creature tF = new Creature("Thunderift Falcon", 6, 0, 1, 0, 5, 3, 1,0,0,0);
