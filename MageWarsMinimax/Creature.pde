@@ -51,6 +51,7 @@ class Creature extends Traits
         armPecDam = 0;
         int dieRoll;
         int dice = damage;
+        int c2Armor = c2.armor;
 
         /*for (int i = 0; i < damage; i++)
         {
@@ -74,13 +75,15 @@ class Creature extends Traits
         }
         if(c2.enchants[3] == 2)
           dice = 0;
-
+        
+        if(c2.enchants[5] == 2)
+          c2Armor = max(c2Armor - 2, 0);
           
 
         regDam = (int)(.5*dice);
         armPecDam = (int)(.5*dice);
 
-        totalDam = max(regDam-c2.armor, 0);
+        totalDam = max(regDam-c2Armor, 0);
         totalDam += armPecDam;
         c2.health -= totalDam;   
         c2.damageTaken = totalDam;
