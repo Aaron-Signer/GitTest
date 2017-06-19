@@ -92,4 +92,59 @@ class Creature extends Traits
 
         c2.checkHealth();
     }
+
+  public void battle(Creature c1,Creature c2)
+    {
+      if(c1.canAttack)
+      {
+        regDam = 0;
+        armPecDam = 0;
+        int dieRoll;
+        int dice = damage;
+        int c2Armor = c2.armor;
+
+        /*for (int i = 0; i < damage; i++)
+        {
+            dieRoll = (int)random(0, 6);
+            if (dieRoll == 2)
+                regDam += 1;
+            else if (dieRoll == 3)
+                regDam += 2;
+            else if (dieRoll == 4)
+                armPecDam += 1;
+            else if (dieRoll == 5)
+                armPecDam += 2;
+        }*/
+        
+        if(enchants[0] == 2)
+          dice += 2;
+        if(c2.enchants[1] == 1)
+        {
+          dice = 0;
+          c2.enchants[1] = 0;
+        }
+        if(c2.enchants[3] == 2)
+          dice = 0;
+        
+        if(c2.enchants[5] == 2)
+          c2Armor = max(c2Armor - 2, 0);
+          
+
+        regDam = (int)(.5*dice);
+        armPecDam = (int)(.5*dice);
+
+        totalDam = max(regDam-c2Armor, 0);
+        totalDam += armPecDam;
+        c2.health -= totalDam;   
+        c2.damageTaken = totalDam;
+        println(name+" did "+totalDam+" damage to the "+c2.name);
+//        println(Names[cost]+" did "+totalDam+" damage to the "+Names[c2.cost]);
+
+        c2.checkHealth();
+        c1.canAttack = false;
+      }
+      else
+        println(c1.name + "has no action available");
+    }
+    
 }

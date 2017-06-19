@@ -1,4 +1,4 @@
-//Final Test young kill me
+import static javax.swing.JOptionPane.*;
 
 Creature sG = new Creature("Steelclaw Grizly", 17, 0, 4, 3, 15, 7, 1,0,0,0);
 Creature tF = new Creature("Thunderift Falcon", 6, 0, 1, 0, 5, 3, 1,0,0,0);
@@ -147,8 +147,23 @@ int miniMax(int ply, int curPlayer)
     return bestScore;
 }
 
+void input()
+{
+  String input = showInputDialog("Enter LOW value for range selection.");
+  input = input.trim();
+  println(input);
+  String first = input.substring(0,1);
+  println(first);
+  String second = input.substring(1);
+  second = second.trim();
+  println(second);
+  int num1 = Integer.parseInt(first);
+  int num2 = Integer.parseInt(second);
+}
 void setup()
 {
+    input();
+  /*low = parseFloat(input == null? "" : input, low);
     cards[2].addEnchant(2,true);
     miniMax(0, 1);
     println();
@@ -158,6 +173,7 @@ void setup()
         print(path[i][1]+"    ");
     }
     print(numHeals);
+    */
 }
 
 void draw()
