@@ -175,7 +175,7 @@ void turn()
 void setup()
 {
     //input();
-  /*low = parseFloat(input == null? "" : input, low);
+  /*ow = parseFloat(input == null? "" : input, low);
     cards[2].addEnchant(2,true);
     miniMax(0, 1);
     println();
@@ -184,8 +184,8 @@ void setup()
         print(path[i][0]+" ");
         print(path[i][1]+"    ");
     }
-    print(numHeals);
-    */
+    print(numHeals);*/
+    
 }
 
 void draw()
@@ -197,7 +197,7 @@ void mousePressed()
   if(mousePressed)
   {
     input();
-    if(cards[num1].canAttack)
+    if(cards[num1].canAttack && cards[num1].belongsTo != cards[num2].belongsTo)
     {
       cards[num1].battleActual(cards[num2]);
       miniMax(0,2);
@@ -206,19 +206,6 @@ void mousePressed()
     else
       println(cards[num1].name + " has no action available");
   }
-}
-
-void keyPressed()
-{
-    if (key == ' ')
-    {
-        aC.battleActual(sG);
-        print(sG.health + " ");
-        if (sG.alive)
-            print("Alive -- ");
-        else
-            print("Dead -- ");
-    }
 }
 
 class optimalPath
