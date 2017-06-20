@@ -1,3 +1,5 @@
+//Test
+
 import static javax.swing.JOptionPane.*;
 
 Creature sG = new Creature("Steelclaw Grizly", 17, 0, 4, 3, 15, 7, 1,0,0,0);
