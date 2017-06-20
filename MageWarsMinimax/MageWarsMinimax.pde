@@ -23,6 +23,10 @@ int numberOfCards = 4;//cards.length;
 int maxPlyLevel = 4;
 //int midDef = numberOfCards/2;
 
+String input, first, second;
+int num1, num2;
+
+
 /*public void printRoute()
 {
     for (int i = 0; i < 4; i++)
@@ -93,20 +97,20 @@ int miniMax(int ply, int curPlayer)
                 {
                     numHeals ++;
                     cards[i].canAttack =false;
-                    println("********Card "+cards[i].name+" healed "+cards[r].name);
+                    //println("********Card "+cards[i].name+" healed "+cards[r].name);
                     int tempHealth = cards[r].health;
                     cards[i].heal(cards[r]);
                     score = miniMax(ply+1,3-curPlayer);
-                    print(score + " ");
+                    //print(score + " ");
                     if (score > bestScore && curPlayer == 1)
                     {
-                        println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+ score+" bestScore: "+bestScore);
+                        //println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+ score+" bestScore: "+bestScore);
                         bestScore = score;
                         updatePath(ply, i, r, bestScore);
                     }
                     if (score < bestScore && curPlayer == 2)
                     {
-                        println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+ score+" bestScore: "+bestScore);
+                        //println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+ score+" bestScore: "+bestScore);
                         bestScore = score;
                         updatePath(ply, i, r, bestScore);
                     }
@@ -123,16 +127,16 @@ int miniMax(int ply, int curPlayer)
                     cards[i].canAttack = false;;
                     cards[i].battle(cards[r]);
                     score = miniMax(ply + 1, 3-curPlayer);
-                    print(score + " ");
+                    //print(score + " ");
                     if (score > bestScore && curPlayer == 1)
                     {
-                        println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+score+" bestScore: "+bestScore);
+                        //println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+score+" bestScore: "+bestScore);
                         bestScore = score;
                         updatePath(ply, i,r,bestScore);
                     }
                     if (score < bestScore && curPlayer == 2)
                     {
-                        println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+score+" bestScore: "+bestScore);
+                        //println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+score+" bestScore: "+bestScore);
                         bestScore = score;
                         updatePath(ply, i,r,bestScore);
                     }
@@ -149,20 +153,26 @@ int miniMax(int ply, int curPlayer)
 
 void input()
 {
-  String input = showInputDialog("Enter LOW value for range selection.");
+  input = showInputDialog("Enter LOW value for range selection.");
   input = input.trim();
   println(input);
-  String first = input.substring(0,1);
+  first = input.substring(0,1);
   println(first);
-  String second = input.substring(1);
+  second = input.substring(1);
   second = second.trim();
   println(second);
-  int num1 = Integer.parseInt(first);
-  int num2 = Integer.parseInt(second);
+  num1 = Integer.parseInt(first);
+  num2 = Integer.parseInt(second);
 }
+
+void turn()
+{
+  
+}
+
 void setup()
 {
-    input();
+    //input();
   /*low = parseFloat(input == null? "" : input, low);
     cards[2].addEnchant(2,true);
     miniMax(0, 1);
@@ -180,11 +190,27 @@ void draw()
 {
 }
 
+void mousePressed()
+{
+  if(mousePressed)
+  {
+    input();
+    if(cards[num1].canAttack)
+    {
+      cards[num1].battleActual(cards[num2]);
+      miniMax(0,2);
+      cards[path[0][0]].battleActual(cards[path[0][1]]);
+    }
+    else
+      println(cards[num1].name + " has no action available");
+  }
+}
+
 void keyPressed()
 {
     if (key == ' ')
     {
-        aC.battle(sG);
+        aC.battleActual(sG);
         print(sG.health + " ");
         if (sG.alive)
             print("Alive -- ");

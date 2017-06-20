@@ -1,6 +1,5 @@
 class Creature extends Traits
 {
-    String name;
     int regDam;
     int armPecDam;
     int totalDam =0;
@@ -87,15 +86,15 @@ class Creature extends Traits
         totalDam += armPecDam;
         c2.health -= totalDam;   
         c2.damageTaken = totalDam;
-        println(name+" did "+totalDam+" damage to the "+c2.name);
+        //println(name+" did "+totalDam+" damage to the "+c2.name);
 //        println(Names[cost]+" did "+totalDam+" damage to the "+Names[c2.cost]);
 
         c2.checkHealth();
     }
 
-  public void battle(Creature c1,Creature c2)
+  public void battleActual(Creature c2)
     {
-      if(c1.canAttack)
+      if(canAttack && c2.alive)
       {
         regDam = 0;
         armPecDam = 0;
@@ -140,11 +139,15 @@ class Creature extends Traits
         println(name+" did "+totalDam+" damage to the "+c2.name);
 //        println(Names[cost]+" did "+totalDam+" damage to the "+Names[c2.cost]);
 
-        c2.checkHealth();
-        c1.canAttack = false;
+        c2.checkHealthActual();
+        canAttack = false;
       }
-      else
-        println(c1.name + "has no action available");
+      
+      else if(!c2.alive)
+        println(c2.name + " is not alive");
+      
+      //else
+       // 
     }
     
 }
