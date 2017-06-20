@@ -94,7 +94,7 @@ class Creature extends Traits
 
   public void battleActual(Creature c2)
     {
-      if(canAttack && c2.alive)
+      if(canAttack && c2.alive && c2.belongsTo != belongsTo)
       {
         regDam = 0;
         armPecDam = 0;
@@ -146,8 +146,8 @@ class Creature extends Traits
       else if(!c2.alive)
         println(c2.name + " is not alive");
       
-      //else
-       // 
+      else
+       println("The creature you attacked belongs to you.");
     }
     
 }
