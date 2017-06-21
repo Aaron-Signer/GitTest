@@ -4,7 +4,7 @@ class Traits
   int [] enchants = new int[7];
   int cost, reach, level, armor, health, damage, index, maxHealth, heal, defense, defNum;
   int originalHealth;
-  boolean alive = true, canHeal = false;
+  boolean alive = true, canHeal = false, flying = false;
   
   public void checkHealth()
   {
@@ -22,11 +22,14 @@ class Traits
   {
     int tmp = 0;
     if(enchants[2] == 2)
+    {
+      println("%%%%%%%%%%%%%%");
       tmp = -4;
+    }
     else
       if(health <= tmp)
       {
-        println(name + "has died");
+        println(name + " has died");
         alive = false;
       }
       else
