@@ -6,7 +6,7 @@ class Creature extends Traits
     int damageTaken = 0;
     int belongsTo;
     // will need to be changed for actual game
-    boolean canAttack = true;
+    boolean canAttack = true, bS;
 
     Creature(String n, int c, int r, int l, int a, int h, int d, int bT, int heals, int def, int defNum, boolean flying)
     {
@@ -29,6 +29,11 @@ class Creature extends Traits
         
         for(int i = 0; i < 7; i++)
           enchants[i] = 0;
+    }
+    void setLocation(int r, int c)
+    {
+      row = r;
+      col = c;
     }
     
     void heal(Creature c2)
@@ -59,7 +64,11 @@ class Creature extends Traits
                       && alive && c2.alive;
     if(c2.flying && !flying)
       temp = false;
-      
+    if(abs(row-c2.row) + abs(col-c2.col) > 1)
+    {
+      println(name + " is too far away from " + c2.name);
+      temp = false;
+    }
     return temp;
   }
 

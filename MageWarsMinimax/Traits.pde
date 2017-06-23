@@ -2,7 +2,7 @@ class Traits
 {
   String name;
   int [] enchants = new int[7];
-  int cost, reach, level, armor, health, damage, index, maxHealth, heal, defense, defNum;
+  int cost, reach, level, armor, health, damage, index, maxHealth, heal, defense, defNum, row, col;
   int originalHealth;
   boolean alive = true, canHeal = false, flying = false;
   

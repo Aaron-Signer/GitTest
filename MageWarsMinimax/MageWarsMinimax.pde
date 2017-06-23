@@ -1,5 +1,6 @@
 //Test
 
+import java.util.Map;
 import static javax.swing.JOptionPane.*;
 boolean hasFlying = true, noFlying = false;
 
@@ -8,6 +9,8 @@ Creature tF = new Creature("Thunderift Falcon", 6, 0, 1, 0, 5, 3, 1, 0, 0, 0, ha
 Creature aC = new Creature("Asyran Cleric", 5, 0, 1, 1, 6, 2, 2, 1, 0, 0, noFlying);
 Creature kW = new Creature("Knight of Westlock", 13, 0, 3, 3, 10, 5, 2, 0, 8, 1, noFlying);
 Creature dB = new Creature("Darkfenne Bat", 5, 0, 1, 0, 4, 2, 2, 0, 0, 0, hasFlying);
+
+
 
 Creature [] cards= {sG, tF, aC, kW, dB};
 //String[] Names = {" ", " ", " ", " ", " ", "Asyran Cleric", "Thunderift Falcon", " ", " ", " ", " ", " ", " ", "Knight of Westlock", " ", " ", " ", "Steelclaw Grizzly"};
@@ -26,6 +29,9 @@ int numberOfCards = cards.length;
 
 String input, first, second;
 int num1, num2;
+
+HashMap<String, Integer> hm = new HashMap<String, Integer>();
+IntDict inventory = new IntDict();
 
 
 /*public void printRoute()
@@ -146,7 +152,23 @@ int miniMax(int ply, int curPlayer)
   else
     bestScore = 10000;
     
-    
+    if (validToPass(curPlayer))
+  {
+    score=miniMax(ply+1, 3-curPlayer);
+    println("Player "+curPlayer+" Passes.lk aklsdhj'fla sjdflkjaslkdjf lasj dflkjasdl fjalskdjf");
+    if (score > bestScore && curPlayer == 1)
+    {
+      println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+ score+" bestScore: "+bestScore);
+      bestScore = score;
+      updatePath(ply, -1, -1, bestScore);
+    }
+    if (score < bestScore && curPlayer == 2)
+    {
+      println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+ score+" bestScore: "+bestScore);
+      bestScore = score;
+      updatePath(ply, -1, -1, bestScore);
+    }
+  }
 
   for (int i = 0; i < numberOfCards; i++)
   {
@@ -209,23 +231,7 @@ int miniMax(int ply, int curPlayer)
   }
     
   
-    if (validToPass(curPlayer))
-  {
-    score=miniMax(ply+1, 3-curPlayer);
-    println("Player "+curPlayer+" Passes.lk aklsdhj'fla sjdflkjaslkdjf lasj dflkjasdl fjalskdjf");
-    if (score > bestScore && curPlayer == 1)
-    {
-      println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+ score+" bestScore: "+bestScore);
-      bestScore = score;
-      updatePath(ply, -1, -1, bestScore);
-    }
-    if (score < bestScore && curPlayer == 2)
-    {
-      println("*** Ply: "+ply+" Player: "+curPlayer+" score: "+ score+" bestScore: "+bestScore);
-      bestScore = score;
-      updatePath(ply, -1, -1, bestScore);
-    }
-  }
+    
   return bestScore;
 }
 
@@ -249,6 +255,16 @@ void turn()
 
 void setup()
 {
+  for(int i = 0; i < cards.length; i++)
+    cards[i].setLocation(0,0);
+  kW.setLocation(1,1);
+  
+  String temp = showInputDialog("Enter LOW value for range selection.");
+  //temp = input.trim();
+  inventory.set("Bear Strength", 0);
+  inventory.set("Endurance",1);
+  println(inventory.get(temp));
+  //println(hm.getValue());
   //input();
   //low = parseFloat(input == null? "" : input, low);
   //cards[2].addEnchant(2,true);
@@ -261,6 +277,9 @@ void setup()
     print(path[i][1]+"    ");
   }
   println(numHeals);
+  
+  
+  
 }
 
 void draw()
